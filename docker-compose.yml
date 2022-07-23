@@ -1,0 +1,19 @@
+version: '3'
+services:
+  c-php:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: c-php
+    volumes:
+      - .:/var/www/html
+
+  c-httpd:
+    image: httpd
+    container_name: c-httpd
+    ports:
+      - "9000:80"
+      - "443:443"
+    volumes:
+      - .:/var/www/html
+      - ./httpd.conf:/usr/local/apache2/conf/httpd.conf
